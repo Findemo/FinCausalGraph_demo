@@ -1,0 +1,47 @@
+[
+  {
+    "id": "L2_001",
+    "name": "加息",
+    "type": "policy"
+  },
+  {
+    "id": "L2_002",
+    "name": "降息",
+    "type": "policy"
+  },
+  {
+    "id": "L2_003",
+    "name": "购买国债",
+    "type": "policy"
+  },
+  {
+    "id": "L2_004",
+    "name": "卖出国债",
+    "type": "policy"
+  },
+  {
+    "id": "L2_005",
+    "name": "回购操作",
+    "type": "policy"
+  },
+  {
+    "id": "L2_006",
+    "name": "逆回购",
+    "type": "policy"
+  },
+  {
+    "id": "L2_007",
+    "name": "贴现窗口",
+    "type": "policy"
+  },
+  {
+    "id": "L2_008",
+    "name": "紧急流动性工具",
+    "type": "policy"
+  },
+  {
+    "id": "L2_009",
+    "name": "银行支持措施",
+    "type": "policy"
+  }
+]

@@ -1,0 +1,772 @@
+[
+  {
+    "source": "L2_002",
+    "target": "E_20200303_001",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200303_001",
+    "target": "L1_001",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_001",
+    "target": "L1_002",
+    "type": "causal"
+  },
+  {
+    "source": "L1_002",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L1_003",
+    "target": "L1_004",
+    "type": "causal"
+  },
+  {
+    "source": "L1_004",
+    "target": "L1_005",
+    "type": "causal"
+  },
+  {
+    "source": "L2_005",
+    "target": "E_20200312_002",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200312_002",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_006",
+    "target": "L1_007",
+    "type": "causal"
+  },
+  {
+    "source": "L1_007",
+    "target": "L1_008",
+    "type": "causal"
+  },
+  {
+    "source": "L1_008",
+    "target": "L1_004",
+    "type": "causal"
+  },
+  {
+    "source": "L2_002",
+    "target": "E_20200315_003",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200315_003",
+    "target": "L1_001",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_001",
+    "target": "L1_008",
+    "type": "causal"
+  },
+  {
+    "source": "L1_008",
+    "target": "L1_009",
+    "type": "causal"
+  },
+  {
+    "source": "L1_009",
+    "target": "L1_004",
+    "type": "causal"
+  },
+  {
+    "source": "L2_003",
+    "target": "E_20200315_004",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200315_004",
+    "target": "L1_009",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_009",
+    "target": "L1_006",
+    "type": "causal"
+  },
+  {
+    "source": "L1_008",
+    "target": "L1_010",
+    "type": "causal"
+  },
+  {
+    "source": "L2_007",
+    "target": "E_20200315_005",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200315_005",
+    "target": "L1_008",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_008",
+    "target": "L1_006",
+    "type": "causal"
+  },
+  {
+    "source": "L1_006",
+    "target": "L1_011",
+    "type": "causal"
+  },
+  {
+    "source": "L1_011",
+    "target": "L1_007",
+    "type": "causal"
+  },
+  {
+    "source": "L1_007",
+    "target": "L1_010",
+    "type": "causal"
+  },
+  {
+    "source": "L2_008",
+    "target": "E_20200317_006",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200317_006",
+    "target": "L1_011",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_011",
+    "target": "L1_006",
+    "type": "causal"
+  },
+  {
+    "source": "L1_006",
+    "target": "L1_010",
+    "type": "causal"
+  },
+  {
+    "source": "L1_010",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L1_003",
+    "target": "L1_012",
+    "type": "causal"
+  },
+  {
+    "source": "L2_008",
+    "target": "E_20200317_007",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200317_007",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_010",
+    "target": "L1_012",
+    "type": "causal"
+  },
+  {
+    "source": "L2_008",
+    "target": "E_20200318_008",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200318_008",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_007",
+    "target": "L1_013",
+    "type": "causal"
+  },
+  {
+    "source": "L1_013",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L2_003",
+    "target": "E_20200323_009",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200323_009",
+    "target": "L1_009",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_010",
+    "target": "L1_013",
+    "type": "causal"
+  },
+  {
+    "source": "L2_008",
+    "target": "E_20200323_010",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200323_010",
+    "target": "L1_011",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_005",
+    "target": "E_20200331_011",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200331_011",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_007",
+    "target": "L1_012",
+    "type": "causal"
+  },
+  {
+    "source": "L1_012",
+    "target": "L1_010",
+    "type": "causal"
+  },
+  {
+    "source": "L1_010",
+    "target": "L1_014",
+    "type": "causal"
+  },
+  {
+    "source": "L2_009",
+    "target": "E_20200401_012",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200401_012",
+    "target": "L1_007",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_007",
+    "target": "L1_006",
+    "type": "causal"
+  },
+  {
+    "source": "L1_006",
+    "target": "L1_008",
+    "type": "causal"
+  },
+  {
+    "source": "L2_008",
+    "target": "E_20200409_013",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20200409_013",
+    "target": "L1_011",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_011",
+    "target": "L1_013",
+    "type": "causal"
+  },
+  {
+    "source": "L1_003",
+    "target": "L1_014",
+    "type": "causal"
+  },
+  {
+    "source": "L1_014",
+    "target": "L1_010",
+    "type": "causal"
+  },
+  {
+    "source": "L2_009",
+    "target": "E_20210319_014",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20210319_014",
+    "target": "L1_015",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_015",
+    "target": "L1_016",
+    "type": "causal"
+  },
+  {
+    "source": "L1_016",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L2_005",
+    "target": "E_20210728_015",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20210728_015",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_006",
+    "target": "E_20210922_016",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20210922_016",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_006",
+    "target": "L1_009",
+    "type": "causal"
+  },
+  {
+    "source": "L1_009",
+    "target": "L1_012",
+    "type": "causal"
+  },
+  {
+    "source": "L1_012",
+    "target": "L1_004",
+    "type": "causal"
+  },
+  {
+    "source": "L1_004",
+    "target": "L1_014",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20220316_017",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20220316_017",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_017",
+    "target": "L1_018",
+    "type": "causal"
+  },
+  {
+    "source": "L1_018",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L1_004",
+    "target": "L1_019",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20220504_018",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20220504_018",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_017",
+    "target": "L1_015",
+    "type": "causal"
+  },
+  {
+    "source": "L1_015",
+    "target": "L1_009",
+    "type": "causal"
+  },
+  {
+    "source": "L1_009",
+    "target": "L1_010",
+    "type": "causal"
+  },
+  {
+    "source": "L2_004",
+    "target": "E_20220504_019",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20220504_019",
+    "target": "L1_016",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_016",
+    "target": "L1_020",
+    "type": "causal"
+  },
+  {
+    "source": "L1_020",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L1_003",
+    "target": "L1_015",
+    "type": "causal"
+  },
+  {
+    "source": "L1_015",
+    "target": "L1_004",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20220615_020",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20220615_020",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_003",
+    "target": "L1_021",
+    "type": "causal"
+  },
+  {
+    "source": "L1_021",
+    "target": "L1_022",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20220727_021",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20220727_021",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20220921_022",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20220921_022",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_017",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L1_022",
+    "target": "L1_004",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20221102_023",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20221102_023",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_004",
+    "target": "L1_021",
+    "type": "causal"
+  },
+  {
+    "source": "L1_021",
+    "target": "L1_019",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20221214_024",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20221214_024",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_004",
+    "target": "L1_012",
+    "type": "causal"
+  },
+  {
+    "source": "L1_012",
+    "target": "L1_022",
+    "type": "causal"
+  },
+  {
+    "source": "L2_004",
+    "target": "E_20220901_025",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20220901_025",
+    "target": "L1_016",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_021",
+    "target": "L1_004",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20230201_026",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20230201_026",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_017",
+    "target": "L1_009",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20230322_027",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20230322_027",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_012",
+    "target": "L1_014",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20230503_028",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20230503_028",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_009",
+    "target": "L1_014",
+    "type": "causal"
+  },
+  {
+    "source": "L1_014",
+    "target": "L1_012",
+    "type": "causal"
+  },
+  {
+    "source": "L2_001",
+    "target": "E_20230726_029",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20230726_029",
+    "target": "L1_017",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_009",
+    "target": "E_20230312_030",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20230312_030",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_009",
+    "target": "E_20240125_031",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20240125_031",
+    "target": "L1_015",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_009",
+    "target": "E_20240311_032",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20240311_032",
+    "target": "L1_015",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_004",
+    "target": "L1_016",
+    "type": "causal"
+  },
+  {
+    "source": "L1_016",
+    "target": "L1_021",
+    "type": "causal"
+  },
+  {
+    "source": "L2_004",
+    "target": "E_20240501_033",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20240501_033",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_002",
+    "target": "E_20240918_034",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20240918_034",
+    "target": "L1_001",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_008",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L2_002",
+    "target": "E_20241107_035",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20241107_035",
+    "target": "L1_001",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_008",
+    "target": "L1_012",
+    "type": "causal"
+  },
+  {
+    "source": "L2_002",
+    "target": "E_20241218_036",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20241218_036",
+    "target": "L1_001",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_001",
+    "target": "L1_003",
+    "type": "causal"
+  },
+  {
+    "source": "L2_006",
+    "target": "E_20241218_037",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20241218_037",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_009",
+    "target": "L1_008",
+    "type": "causal"
+  },
+  {
+    "source": "L1_008",
+    "target": "L1_014",
+    "type": "causal"
+  },
+  {
+    "source": "L1_014",
+    "target": "L1_004",
+    "type": "causal"
+  },
+  {
+    "source": "L2_004",
+    "target": "E_20250319_038",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20250319_038",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_002",
+    "target": "E_20250917_039",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20250917_039",
+    "target": "L1_001",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_002",
+    "target": "E_20251029_040",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20251029_040",
+    "target": "L1_001",
+    "type": "triggers"
+  },
+  {
+    "source": "L2_004",
+    "target": "E_20251029_041",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20251029_041",
+    "target": "L1_006",
+    "type": "triggers"
+  },
+  {
+    "source": "L1_010",
+    "target": "L1_009",
+    "type": "causal"
+  },
+  {
+    "source": "L2_002",
+    "target": "E_20251210_042",
+    "type": "instance_of"
+  },
+  {
+    "source": "E_20251210_042",
+    "target": "L1_001",
+    "type": "triggers"
+  }
+]

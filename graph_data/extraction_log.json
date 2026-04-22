@@ -1,0 +1,560 @@
+{
+  "generated_at": "2026-04-12T17:00:36.096359+00:00",
+  "origin_dir": "data/origin_news",
+  "events_parsed": 42,
+  "events": [
+    {
+      "source_event_index": 1,
+      "event_node_id": "E_20200303_001",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率下降",
+        "短端利率下移",
+        "长端收益率上升",
+        "股票波动加剧",
+        "风险偏好下降"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 2,
+      "event_node_id": "E_20200312_002",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "国债市场流动性改善",
+        "融资成本下降",
+        "股票波动加剧",
+        "风险偏好下降"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 3,
+      "event_node_id": "E_20200315_003",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率下降",
+        "融资成本下降",
+        "长端收益率下降",
+        "股票波动加剧",
+        "风险偏好下降"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 4,
+      "event_node_id": "E_20200315_004",
+      "status": "ok",
+      "mechanism_chain": [
+        "长端收益率下降",
+        "流动性改善",
+        "国债市场流动性改善",
+        "融资成本下降",
+        "股票反弹"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 5,
+      "event_node_id": "E_20200315_005",
+      "status": "ok",
+      "mechanism_chain": [
+        "融资成本下降",
+        "流动性改善",
+        "信用利差收敛",
+        "国债市场流动性改善",
+        "股票反弹"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 6,
+      "event_node_id": "E_20200317_006",
+      "status": "ok",
+      "mechanism_chain": [
+        "信用利差收敛",
+        "流动性改善",
+        "股票反弹",
+        "长端收益率上升",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 7,
+      "event_node_id": "E_20200317_007",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "国债市场流动性改善",
+        "融资成本下降",
+        "股票反弹",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 8,
+      "event_node_id": "E_20200318_008",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "国债市场流动性改善",
+        "风险偏好修复",
+        "长端收益率上升",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 9,
+      "event_node_id": "E_20200323_009",
+      "status": "ok",
+      "mechanism_chain": [
+        "长端收益率下降",
+        "流动性改善",
+        "国债市场流动性改善",
+        "股票反弹",
+        "风险偏好修复"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 10,
+      "event_node_id": "E_20200323_010",
+      "status": "ok",
+      "mechanism_chain": [
+        "信用利差收敛",
+        "流动性改善",
+        "股票反弹",
+        "长端收益率上升",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 11,
+      "event_node_id": "E_20200331_011",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "国债市场流动性改善",
+        "美元走弱",
+        "股票反弹",
+        "黄金上涨"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 12,
+      "event_node_id": "E_20200401_012",
+      "status": "ok",
+      "mechanism_chain": [
+        "国债市场流动性改善",
+        "流动性改善",
+        "融资成本下降",
+        "股票反弹",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 13,
+      "event_node_id": "E_20200409_013",
+      "status": "ok",
+      "mechanism_chain": [
+        "信用利差收敛",
+        "风险偏好修复",
+        "长端收益率上升",
+        "黄金上涨",
+        "股票反弹"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 14,
+      "event_node_id": "E_20210319_014",
+      "status": "ok",
+      "mechanism_chain": [
+        "融资成本上升",
+        "流动性收紧",
+        "长端收益率上升",
+        "股票波动加剧",
+        "风险偏好下降"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 15,
+      "event_node_id": "E_20210728_015",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "国债市场流动性改善",
+        "融资成本下降",
+        "股票反弹",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 16,
+      "event_node_id": "E_20210922_016",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "长端收益率下降",
+        "美元走弱",
+        "股票波动加剧",
+        "黄金上涨"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 17,
+      "event_node_id": "E_20220316_017",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "短端利率上移",
+        "长端收益率上升",
+        "股票波动加剧",
+        "原油承压"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 18,
+      "event_node_id": "E_20220504_018",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "融资成本上升",
+        "长端收益率下降",
+        "股票反弹",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 19,
+      "event_node_id": "E_20220504_019",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性收紧",
+        "期限溢价上升",
+        "长端收益率上升",
+        "融资成本上升",
+        "股票波动加剧"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 20,
+      "event_node_id": "E_20220615_020",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "短端利率上移",
+        "长端收益率上升",
+        "美元走强",
+        "黄金承压"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 21,
+      "event_node_id": "E_20220727_021",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "融资成本上升",
+        "长端收益率下降",
+        "美元走弱",
+        "股票反弹",
+        "黄金上涨"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 22,
+      "event_node_id": "E_20220921_022",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "长端收益率上升",
+        "美元走强",
+        "黄金承压",
+        "股票波动加剧"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 23,
+      "event_node_id": "E_20221102_023",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "长端收益率上升",
+        "股票波动加剧",
+        "美元走强",
+        "原油承压"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 24,
+      "event_node_id": "E_20221214_024",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "长端收益率上升",
+        "股票波动加剧",
+        "美元走弱",
+        "黄金承压"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 25,
+      "event_node_id": "E_20220901_025",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性收紧",
+        "长端收益率上升",
+        "美元走强",
+        "股票波动加剧",
+        "原油承压"
+      ],
+      "date_normalization_note": "normalized_from_narrative:event_025"
+    },
+    {
+      "source_event_index": 26,
+      "event_node_id": "E_20230201_026",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "长端收益率下降",
+        "美元走弱",
+        "股票反弹",
+        "黄金上涨"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 27,
+      "event_node_id": "E_20230322_027",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "长端收益率下降",
+        "美元走弱",
+        "黄金上涨",
+        "股票反弹"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 28,
+      "event_node_id": "E_20230503_028",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "长端收益率下降",
+        "黄金上涨",
+        "美元走弱",
+        "股票反弹"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 29,
+      "event_node_id": "E_20230726_029",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率上升",
+        "融资成本上升",
+        "长端收益率下降",
+        "美元走弱",
+        "黄金上涨"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 30,
+      "event_node_id": "E_20230312_030",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "信用利差收敛",
+        "国债市场流动性改善",
+        "股票反弹",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 31,
+      "event_node_id": "E_20240125_031",
+      "status": "ok",
+      "mechanism_chain": [
+        "融资成本上升",
+        "流动性收紧",
+        "长端收益率上升",
+        "美元走强",
+        "黄金承压"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 32,
+      "event_node_id": "E_20240311_032",
+      "status": "ok",
+      "mechanism_chain": [
+        "融资成本上升",
+        "股票波动加剧",
+        "流动性收紧",
+        "美元走强",
+        "原油承压"
+      ],
+      "date_normalization_note": "normalized_from_narrative:event_032"
+    },
+    {
+      "source_event_index": 33,
+      "event_node_id": "E_20240501_033",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "长端收益率下降",
+        "美元走弱",
+        "黄金上涨",
+        "股票反弹"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 34,
+      "event_node_id": "E_20240918_034",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率下降",
+        "融资成本下降",
+        "长端收益率上升",
+        "股票波动加剧",
+        "美元走强"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 35,
+      "event_node_id": "E_20241107_035",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率下降",
+        "融资成本下降",
+        "美元走弱",
+        "黄金上涨",
+        "股票反弹"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 36,
+      "event_node_id": "E_20241218_036",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率下降",
+        "长端收益率上升",
+        "美元走强",
+        "黄金承压",
+        "股票波动加剧"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 37,
+      "event_node_id": "E_20241218_037",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "长端收益率下降",
+        "融资成本下降",
+        "黄金上涨",
+        "股票波动加剧"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 38,
+      "event_node_id": "E_20250319_038",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "长端收益率下降",
+        "美元走弱",
+        "股票反弹",
+        "黄金上涨"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 39,
+      "event_node_id": "E_20250917_039",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率下降",
+        "融资成本下降",
+        "长端收益率上升",
+        "股票波动加剧",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 40,
+      "event_node_id": "E_20251029_040",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率下降",
+        "长端收益率上升",
+        "美元走强",
+        "黄金承压",
+        "股票波动加剧"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 41,
+      "event_node_id": "E_20251029_041",
+      "status": "ok",
+      "mechanism_chain": [
+        "流动性改善",
+        "融资成本下降",
+        "股票反弹",
+        "长端收益率下降",
+        "美元走弱"
+      ],
+      "date_normalization_note": null
+    },
+    {
+      "source_event_index": 42,
+      "event_node_id": "E_20251210_042",
+      "status": "ok",
+      "mechanism_chain": [
+        "利率下降",
+        "融资成本下降",
+        "长端收益率下降",
+        "美元走弱",
+        "股票反弹",
+        "黄金上涨"
+      ],
+      "date_normalization_note": null
+    }
+  ],
+  "ambiguous_date_normalization": [
+    25,
+    32
+  ],
+  "notes": "Mechanism chains are manually curated from narratives; linear causal approximation per event."
+}
