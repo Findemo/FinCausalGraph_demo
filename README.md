@@ -14,7 +14,7 @@
 本地运行时，`fetch` 依赖 `index.html` 的 URL 作为基准，请用静态服务器打开仓库根目录，例如：
 
 ```bash
-cd "/Users/zhou/Desktop/Research/事理图谱抽取/FinCausalGraph_demo"
+cd "FinCausalGraph_demo"
 python3 -m http.server 8080
 ```
 
@@ -32,4 +32,3 @@ python3 -m http.server 8080
 
 ## 与源项目同步数据
 
-若你在 `demo展示` 中更新了图谱构建脚本产出的 JSON，可将 `graph_data/*.json` 再复制到本仓库对应目录并提交。
