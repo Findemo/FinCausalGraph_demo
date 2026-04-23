@@ -1,5 +1,5 @@
-// app.js lives in viz/js/ — graph_data/ is at repo root, so go up twice
-const GRAPH_BASE = new URL("../../graph_data/", import.meta.url);
+// data-loader.js lives in js/ — graph_data/ is sibling directory at project root.
+const GRAPH_BASE = new URL("../graph_data/", import.meta.url);
 
 export async function loadGraphBundle() {
   const [nodesLevel2, nodesLevel1, nodesLevel0, edges, extractionLog] =

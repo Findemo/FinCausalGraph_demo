@@ -254,5 +254,5 @@ async function main() {
 
 main().catch((err) => {
   console.error(err);
-  document.getElementById("detail-content").innerHTML = `<p class="muted">加载失败：${err.message}。请用本地静态服务器打开（见 viz/README.md）。</p>`;
+  document.getElementById("detail-content").innerHTML = `<p class="muted">加载失败：${err.message}。请用本地静态服务器打开（见 README.md）。</p>`;
 });
