@@ -1,5 +1,5 @@
-// js/ 与仓库根目录下的 graph_data/ 同级
-const GRAPH_BASE = new URL("../graph_data/", import.meta.url);
+// app.js lives in viz/js/ — graph_data/ is at repo root, so go up twice
+const GRAPH_BASE = new URL("../../graph_data/", import.meta.url);
 
 export async function loadGraphBundle() {
   const [nodesLevel2, nodesLevel1, nodesLevel0, edges, extractionLog] =

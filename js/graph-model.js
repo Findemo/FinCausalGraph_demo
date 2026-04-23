@@ -1,203 +1,121 @@
-const L3_ID = "L3_MONETARY";
+const POLICY_ID = "POLICY_ROOT";
 
 /** @param {Awaited<ReturnType<typeof import('./data-loader.js').loadGraphBundle>>} bundle */
 export function buildGraphModel(bundle) {
-  const { nodesLevel2, nodesLevel1, nodesLevel0, edges, extractionLog } =
-    bundle;
+  const { nodesLevel2, nodesLevel1, nodesLevel0, edges, extractionLog } = bundle;
 
-  const rootNode = {
-    id: L3_ID,
-    name: "货币政策",
-    type: "abstraction",
-    layer: 3,
+  const policyNode = { id: POLICY_ID, name: "货币政策", type: "policy", layer: "policy" };
+  const actionNodes = nodesLevel2.map((n) => ({
+    id: `ACT_${n.id}`,
+    name: n.name,
+    type: "action",
+    layer: "action",
+    policyType: n.name,
+    sourceL2Id: n.id,
+  }));
+  const mechanismNodes = nodesLevel1.map((n) => ({ ...n, layer: "mechanism" }));
+  const eventNodes = nodesLevel0.map((n) => ({ ...n, name: n.title || n.id, layer: "event" }));
+
+  const nodeById = new Map([policyNode, ...actionNodes, ...mechanismNodes, ...eventNodes].map((n) => [n.id, n]));
+  const l1NameToId = new Map(mechanismNodes.map((n) => [n.name, n.id]));
+  const eventIdToLog = new Map((extractionLog.events || []).map((r) => [r.event_node_id, r]));
+  const policyTypeToActionId = new Map(actionNodes.map((n) => [n.policyType, n.id]));
+
+  /** @type {Map<string, string>} */
+  const eventToAction = new Map();
+  /** @type {Map<string, string[]>} */
+  const eventToMechanisms = new Map();
+
+  for (const ev of eventNodes) {
+    const aid = policyTypeToActionId.get(ev.policy_type) || actionNodes[0]?.id || null;
+    if (aid) eventToAction.set(ev.id, aid);
+    const chainNames = eventIdToLog.get(ev.id)?.mechanism_chain || [];
+    const mids = chainNames.map((n) => l1NameToId.get(n)).filter(Boolean);
+    eventToMechanisms.set(ev.id, mids);
+  }
+
+  const renderEdges = [];
+  const edgeKey = (source, target, type) => `${source}|${target}|${type}`;
+  const pushEdge = (source, target, type, strength = 0.1) => {
+    renderEdges.push({ source, target, type, key: edgeKey(source, target, type), strength });
   };
 
-  const l2Nodes = nodesLevel2.map((n) => ({ ...n, layer: 2 }));
-  const l1Nodes = nodesLevel1.map((n) => ({ ...n, layer: 1 }));
-  const l0Nodes = nodesLevel0.map((n) => ({ ...n, layer: 0 }));
-
-  const nodeById = new Map();
-  for (const n of [rootNode, ...l2Nodes, ...l1Nodes, ...l0Nodes]) {
-    nodeById.set(n.id, n);
+  for (const action of actionNodes) pushEdge(policyNode.id, action.id, "policy_action", 0.22);
+  for (const ev of eventNodes) {
+    const aid = eventToAction.get(ev.id);
+    if (aid) pushEdge(aid, ev.id, "action_event", 0.16);
   }
 
-  const l1NameToId = new Map(l1Nodes.map((n) => [n.name, n.id]));
-
-  const virtualEdges = l2Nodes.map((n) => ({
-    source: L3_ID,
-    target: n.id,
-    type: "abstract_link",
-  }));
-
-  const edgeKey = (s, t, ty) => `${s}|${t}|${ty}`;
-
-  const eventIdToLog = new Map();
-  for (const row of extractionLog.events || []) {
-    eventIdToLog.set(row.event_node_id, row);
+  for (const ev of eventNodes) {
+    const aid = eventToAction.get(ev.id);
+    for (const mid of eventToMechanisms.get(ev.id) || []) {
+      if (aid) pushEdge(aid, mid, "action_mechanism", 0.12);
+      pushEdge(mid, ev.id, "mechanism_event", 0.08);
+    }
   }
 
-  const l2IdToEvents = new Map();
-  for (const l2 of l2Nodes) {
-    l2IdToEvents.set(
-      l2.id,
-      l0Nodes.filter((e) => e.policy_type === l2.name),
-    );
-  }
-
-  /** @type {Map<string, string>} eventId -> L2 id */
-  const eventToL2 = new Map();
   for (const e of edges) {
-    if (e.type === "instance_of") {
-      eventToL2.set(e.target, e.source);
+    if (e.type === "causal" && nodeById.has(e.source) && nodeById.has(e.target)) {
+      pushEdge(e.source, e.target, "causal", 0.1);
     }
-  }
-
-  /** 每个机制节点主要归属的政策类型（按共现事件数），用于径向分簇与 support_link */
-  const l1PrimaryL2 = new Map();
-  const l1L2Counts = new Map();
-  for (const ev of l0Nodes) {
-    const l2id = eventToL2.get(ev.id);
-    if (!l2id) continue;
-    const log = eventIdToLog.get(ev.id);
-    const names = log?.mechanism_chain || [];
-    for (const name of names) {
-      const l1id = l1NameToId.get(name);
-      if (!l1id) continue;
-      if (!l1L2Counts.has(l1id)) l1L2Counts.set(l1id, new Map());
-      const m = l1L2Counts.get(l1id);
-      m.set(l2id, (m.get(l2id) || 0) + 1);
-    }
-  }
-  for (const l1 of l1Nodes) {
-    const m = l1L2Counts.get(l1.id);
-    if (!m || m.size === 0) {
-      l1PrimaryL2.set(l1.id, l2Nodes[0].id);
-      continue;
-    }
-    let best = l2Nodes[0].id;
-    let bestc = -1;
-    for (const [l2id, c] of m) {
-      if (c > bestc) {
-        bestc = c;
-        best = l2id;
-      }
-    }
-    l1PrimaryL2.set(l1.id, best);
-  }
-
-  const syntheticEdges = [];
-  for (const l1 of l1Nodes) {
-    const src = l1PrimaryL2.get(l1.id);
-    if (src)
-      syntheticEdges.push({
-        source: src,
-        target: l1.id,
-        type: "support_link",
-      });
-  }
-
-  const allEdges = [...edges, ...virtualEdges, ...syntheticEdges];
-
-  const edgeSet = new Set(allEdges.map((e) => edgeKey(e.source, e.target, e.type)));
-
-  function getChainL1Ids(eventId) {
-    const log = eventIdToLog.get(eventId);
-    if (!log || !log.mechanism_chain) return [];
-    return log.mechanism_chain
-      .map((name) => l1NameToId.get(name))
-      .filter(Boolean);
   }
 
   function getChainNames(eventId) {
-    const log = eventIdToLog.get(eventId);
-    return log?.mechanism_chain || [];
+    return eventIdToLog.get(eventId)?.mechanism_chain || [];
   }
 
-  /**
-   * Collect node ids and edge keys for one event's vertical slice (L3→L2→E→L1 chain).
-   */
+  function getChainL1Ids(eventId) {
+    return (eventToMechanisms.get(eventId) || []).slice();
+  }
+
   function getPathForEvent(eventId) {
     const nodes = new Set();
-    const eKeys = new Set();
-    const l2id = eventToL2.get(eventId);
-    if (!l2id) return { nodes, edgeKeys: eKeys };
+    const edgesInPath = new Set();
+    const ev = nodeById.get(eventId);
+    if (!ev || ev.layer !== "event") return { nodes, edges: edgesInPath };
+    const aid = eventToAction.get(eventId);
+    const mids = eventToMechanisms.get(eventId) || [];
 
-    nodes.add(l2id);
+    nodes.add(policyNode.id);
     nodes.add(eventId);
-
-    const chain = getChainL1Ids(eventId);
-    if (chain.length === 0) return { nodes, edgeKeys: eKeys };
-
-    // Event focus highlights only mechanism chain internals to avoid
-    // large cross-layer white lines from hub/instance/trigger edges.
-    for (const id of chain) {
-      nodes.add(id);
+    if (aid) {
+      nodes.add(aid);
+      edgesInPath.add(edgeKey(policyNode.id, aid, "policy_action"));
+      edgesInPath.add(edgeKey(aid, eventId, "action_event"));
     }
-
-    for (let i = 0; i < chain.length - 1; i++) {
-      const a = chain[i];
-      const b = chain[i + 1];
-      const k = edgeKey(a, b, "causal");
-      if (edgeSet.has(k)) eKeys.add(k);
+    for (const mid of mids) {
+      nodes.add(mid);
+      if (aid) edgesInPath.add(edgeKey(aid, mid, "action_mechanism"));
+      edgesInPath.add(edgeKey(mid, eventId, "mechanism_event"));
     }
-
-    return { nodes, edgeKeys: eKeys };
+    for (let i = 0; i < mids.length - 1; i++) {
+      edgesInPath.add(edgeKey(mids[i], mids[i + 1], "causal"));
+    }
+    return { nodes, edges: edgesInPath };
   }
 
-  function getEventsUsingMechanism(l1Id) {
-    const name = nodeById.get(l1Id)?.name;
-    if (!name) return [];
-    return l0Nodes.filter((ev) => {
-      const chain = getChainNames(ev.id);
-      return chain.includes(name);
+  function getEventsByFilter({ policy = "all", year = "all" }) {
+    return eventNodes.filter((ev) => {
+      const yearOk = year === "all" ? true : String(ev.date || "").startsWith(`${year}`);
+      const policyOk = policy === "all" ? true : ev.policy_type === policy;
+      return yearOk && policyOk;
     });
   }
 
-  function unionPathsForEvents(eventIds) {
-    const nodes = new Set();
-    const edgeKeys = new Set();
-    for (const eid of eventIds) {
-      const p = getPathForEvent(eid);
-      p.nodes.forEach((n) => nodes.add(n));
-      p.edgeKeys.forEach((k) => edgeKeys.add(k));
-    }
-    return { nodes, edgeKeys };
-  }
-
-  function getPathForL2Only(l2id) {
-    const nodes = new Set([L3_ID, l2id]);
-    const eKeys = new Set([edgeKey(L3_ID, l2id, "abstract_link")]);
-    return { nodes, edgeKeys: eKeys };
-  }
-
-  function getPathForRoot() {
-    const nodes = new Set([L3_ID, ...l2Nodes.map((n) => n.id)]);
-    const eKeys = new Set(
-      l2Nodes.map((n) => edgeKey(L3_ID, n.id, "abstract_link")),
-    );
-    return { nodes, edgeKeys: eKeys };
-  }
-
   return {
-    rootId: L3_ID,
+    policyNode,
+    actionNodes,
+    mechanismNodes,
+    eventNodes,
     nodeById,
-    l2Nodes,
-    l1Nodes,
-    l0Nodes,
-    allEdges,
-    edgeSet,
+    renderEdges,
     edgeKey,
-    l2IdToEvents,
-    eventToL2,
-    eventIdToLog,
-    getChainL1Ids,
     getChainNames,
+    getChainL1Ids,
     getPathForEvent,
-    getEventsUsingMechanism,
-    unionPathsForEvents,
-    getPathForL2Only,
-    getPathForRoot,
-    l1PrimaryL2,
-    syntheticEdges,
+    getEventsByFilter,
+    eventToAction,
+    eventToMechanisms,
+    eventIdToLog,
   };
 }

@@ -1,9 +1,8 @@
 const detailContent = () => document.getElementById("detail-content");
+const impactContent = () => document.getElementById("impact-content");
 const chainContent = () => document.getElementById("chain-content");
+const sourceContent = () => document.getElementById("sources-content");
 const newsActions = () => document.getElementById("news-actions");
-const timeDrawer = () => document.getElementById("time-drawer");
-const timeDrawerTitle = () => document.getElementById("time-drawer-title");
-const timeDrawerBody = () => document.getElementById("time-drawer-body");
 const newsModal = () => document.getElementById("news-modal");
 const newsModalBody = () => document.getElementById("news-modal-body");
 const newsModalTitle = () => document.getElementById("news-modal-title");
@@ -14,34 +13,36 @@ function esc(s) {
   return d.innerHTML;
 }
 
-/**
- * @param {ReturnType<import('./graph-model.js').buildGraphModel>} model
- * @param {string | null} nodeId
- * @param {{ events?: unknown[], pickMode?: boolean }} opts
- */
-export function renderDetail(model, nodeId, opts = {}) {
+function highlightImpact(text = "") {
+  return esc(text)
+    .replaceAll("上涨", '<span class="highlight">上涨</span>')
+    .replaceAll("下跌", '<span class="highlight">下跌</span>')
+    .replaceAll("回调", '<span class="highlight">回调</span>')
+    .replaceAll("收紧", '<span class="highlight">收紧</span>');
+}
+
+export function renderDetail(model, nodeId) {
   const el = detailContent();
+  const impactEl = impactContent();
+  const sourceEl = sourceContent();
   if (!nodeId || !model.nodeById.has(nodeId)) {
     el.className = "muted";
-    el.innerHTML = "点击图中任意节点";
+    impactEl.className = "muted";
+    sourceEl.className = "muted";
+    el.innerHTML = "点击事件或时间轴节点查看详情";
+    impactEl.innerHTML = "将自动提取影响描述并高亮关键词";
+    sourceEl.innerHTML = "来源信息将在事件选中后展示";
     return;
   }
   const n = model.nodeById.get(nodeId);
   el.className = "";
-  const layerLabel =
-    n.type === "abstraction"
-      ? "抽象层（顶层）"
-      : n.layer === 2
-        ? "政策类型（Level 2）"
-        : n.layer === 1
-          ? "传导机制（Level 1）"
-          : "具体事件（Level 0）";
+  const layerLabel = n.layer;
 
   let html = `
     <div class="detail-row"><strong>名称</strong>${esc(n.name || n.title)}</div>
     <div class="detail-row"><strong>层级</strong>${esc(layerLabel)}</div>
   `;
-  if (n.layer === 0) {
+  if (n.layer === "event") {
     html += `
       <div class="detail-row"><strong>日期</strong>${esc(n.date)}</div>
       <div class="detail-row"><strong>政策类型</strong>${esc(n.policy_type)}</div>
@@ -50,12 +51,20 @@ export function renderDetail(model, nodeId, opts = {}) {
   }
   el.innerHTML = html;
 
-  if (opts.pickMode && opts.events?.length) {
-    el.innerHTML += `<div class="event-pick"><h3>相关具体事件（点击收窄高亮）</h3>`;
-    for (const ev of opts.events) {
-      el.innerHTML += `<button type="button" class="js-pick-ev" data-ev="${esc(ev.id)}">${esc(ev.date)} · ${esc(ev.title)}</button>`;
-    }
-    el.innerHTML += `</div>`;
+  if (n.layer === "event") {
+    impactEl.className = "";
+    sourceEl.className = "";
+    impactEl.innerHTML = highlightImpact(n.summary || "暂无市场影响描述");
+    sourceEl.innerHTML = `
+      <div class="detail-row"><strong>机构</strong>${esc(n.source_org || "-")}</div>
+      <div class="detail-row"><strong>发布时间</strong>${esc(n.source_published_at_raw || n.date || "-")}</div>
+      <div class="detail-row"><strong>标题</strong>${esc(n.source_title || n.title || "-")}</div>
+    `;
+  } else {
+    impactEl.className = "muted";
+    sourceEl.className = "muted";
+    impactEl.innerHTML = "请选择具体事件查看市场影响";
+    sourceEl.innerHTML = "请选择具体事件查看来源信息";
   }
 }
 
@@ -66,7 +75,7 @@ export function renderDetail(model, nodeId, opts = {}) {
 export function renderChain(model, eventId) {
   const el = chainContent();
   const btnBlock = newsActions();
-  if (!eventId || !model.nodeById.get(eventId) || model.nodeById.get(eventId).layer !== 0) {
+  if (!eventId || !model.nodeById.get(eventId) || model.nodeById.get(eventId).layer !== "event") {
     el.className = "muted";
     el.textContent = "选中具体事件后显示";
     btnBlock.classList.add("hidden");
@@ -98,7 +107,7 @@ export function setNewsModalOpen(open, model, eventId) {
     return;
   }
   const ev = model.nodeById.get(eventId);
-  if (!ev || ev.layer !== 0) {
+  if (!ev || ev.layer !== "event") {
     modal.setAttribute("aria-hidden", "true");
     return;
   }
@@ -113,71 +122,13 @@ export function setNewsModalOpen(open, model, eventId) {
   `;
 }
 
-export function setTimeDrawerOpen(open) {
-  timeDrawer().setAttribute("aria-hidden", open ? "false" : "true");
-}
-
-/**
- * @param {ReturnType<import('./graph-model.js').buildGraphModel>} model
- * @param {'root' | 'l2'} mode
- * @param {string | null} l2Id
- */
-export function fillTimeDrawer(model, mode, l2Id) {
-  const title = timeDrawerTitle();
-  const body = timeDrawerBody();
-  let events = [];
-  if (mode === "root") {
-    title.textContent = "货币政策 — 全部实例（按时间）";
-    events = [...model.l0Nodes].sort((a, b) => a.date.localeCompare(b.date));
-  } else if (l2Id) {
-    const l2 = model.nodeById.get(l2Id);
-    title.textContent = `${l2?.name || ""} — 时间线`;
-    events = [...(model.l2IdToEvents.get(l2Id) || [])].sort((a, b) =>
-      a.date.localeCompare(b.date),
-    );
-  }
-  const byDate = new Map();
-  for (const ev of events) {
-    if (!byDate.has(ev.date)) byDate.set(ev.date, []);
-    byDate.get(ev.date).push(ev);
-  }
-  const dates = [...byDate.keys()].sort();
-  body.innerHTML = dates
-    .map((d) => {
-      const items = byDate
-        .get(d)
-        .map((ev) => {
-          const chain = model.getChainNames(ev.id).join(" → ");
-          return `<button type="button" class="time-item js-time-pick" data-ev="${esc(ev.id)}">
-            <div class="time-item-title">${esc(ev.title)}</div>
-            <div class="time-item-meta">${esc(ev.policy_type)} · ${esc(ev.text_ref)}</div>
-            <div class="time-item-chain">${esc(chain)}</div>
-          </button>`;
-        })
-        .join("");
-      return `<div class="time-group"><h4>${esc(d)}</h4>${items}</div>`;
-    })
-    .join("");
-}
-
 export function bindPanelClicks(onPickEvent) {
-  document.getElementById("detail-content")?.addEventListener("click", (e) => {
+  document.getElementById("sources-content")?.addEventListener("click", (e) => {
     const t = e.target.closest(".js-pick-ev");
     if (!t) return;
     const id = t.getAttribute("data-ev");
     if (id) onPickEvent(id);
   });
-  document.getElementById("time-drawer-body")?.addEventListener("click", (e) => {
-    const t = e.target.closest(".js-time-pick");
-    if (!t) return;
-    const id = t.getAttribute("data-ev");
-    if (id) onPickEvent(id);
-  });
-}
-
-export function bindDrawerClose(onClose) {
-  document.getElementById("time-drawer-close")?.addEventListener("click", onClose);
-  document.getElementById("time-drawer-backdrop")?.addEventListener("click", onClose);
 }
 
 export function bindNewsModal(onClose) {

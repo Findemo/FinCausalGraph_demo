@@ -3,72 +3,118 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>分层金融因果图</title>
+    <title>FinCausalGraph Terminal</title>
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <header class="app-header">
-      <h1>分层金融因果图</h1>
-      <p class="subtitle">
-        左侧为<strong>节点详情与机制链</strong>；中间为自上而下三层<strong>立体圆盘</strong>（中盘与底盘加大、竖直拉开；机制为小框紧包文字、分散无重叠）；右侧<strong>具体事件</strong>更窄、贴右、每行 3
-        个。数据来自 <code>graph_data/</code>。
-      </p>
-    </header>
+    <main class="dashboard">
+      <header class="top-bar" aria-label="时间轴与筛选">
+        <div class="brand-block">
+          <h1>FinCausalGraph</h1>
+          <p>Monetary Causal Explorer</p>
+        </div>
+        <section class="filter-wrap">
+          <label>
+            时间范围
+            <select id="filter-year">
+              <option value="all">全部时间</option>
+            </select>
+          </label>
+          <label>
+            事件类型
+            <select id="filter-policy">
+              <option value="all">全部类型</option>
+            </select>
+          </label>
+          <label>
+            市场
+            <select id="filter-market">
+              <option value="all">全部市场</option>
+              <option value="rates">利率</option>
+              <option value="equity">股票</option>
+              <option value="fx">汇率</option>
+              <option value="gold">黄金</option>
+            </select>
+          </label>
+        </section>
+      </header>
 
-    <main class="main-grid">
-      <aside class="side-panel" aria-label="节点详情与机制链">
-        <div id="detail-panel" class="panel-block">
-          <h2>节点详情</h2>
-          <div id="detail-content" class="muted">点击图中任意节点</div>
-        </div>
-        <div id="chain-panel" class="panel-block">
-          <h2>机制链</h2>
-          <div id="chain-content" class="muted">选中具体事件后显示</div>
-        </div>
-        <div id="news-actions" class="panel-block hidden">
-          <button type="button" id="btn-news" class="btn-primary">查看原始新闻</button>
-        </div>
+      <aside class="left-panel" aria-label="导航与图例">
+        <section class="card">
+          <h2>探索导航</h2>
+          <ul class="nav-list">
+            <li class="active">图谱总览</li>
+            <li>时间轴</li>
+            <li>事件列表</li>
+            <li>机制链</li>
+            <li>数据来源</li>
+          </ul>
+        </section>
+        <section class="card">
+          <h2>图例说明</h2>
+          <ul class="legend-list">
+            <li><span class="dot policy"></span> Policy</li>
+            <li><span class="dot action"></span> Action</li>
+            <li><span class="dot mechanism"></span> Mechanism</li>
+            <li><span class="dot event"></span> Event</li>
+            <li><span class="line active-path"></span> Active Path</li>
+          </ul>
+        </section>
+        <section class="card stats-card">
+          <h2>图谱统计</h2>
+          <div id="graph-stats" class="muted">加载中...</div>
+        </section>
       </aside>
 
-      <section class="canvas-wrap" aria-label="主分层图">
-        <div class="svg-scroll">
-          <svg id="layer-graph" xmlns="http://www.w3.org/2000/svg" role="img">
-            <defs>
-              <marker
-                id="arrow-end"
-                viewBox="0 0 10 10"
-                refX="8.5"
-                refY="5"
-                markerWidth="7"
-                markerHeight="7"
-                orient="auto"
-              >
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
-              </marker>
-            </defs>
-            <g id="edges-layer"></g>
-            <g id="nodes-layer"></g>
-          </svg>
+      <section class="center-stage" aria-label="因果图主舞台">
+        <div id="graph-stage" class="graph-stage">
+          <canvas id="graph-canvas" aria-label="Causal Graph WebGL"></canvas>
+          <div id="band-policy" class="graph-layer-band policy"></div>
+          <div id="band-action" class="graph-layer-band action"></div>
+          <div id="band-mechanism" class="graph-layer-band mechanism"></div>
+          <div id="graph-overlay" class="graph-overlay"></div>
         </div>
-        <div class="layer-legend">
-          <span class="lg lg-root">顶盘 · 货币政策</span>
-          <span class="lg lg-l2">中盘 · 九类政策</span>
-          <span class="lg lg-l1">底盘 · 机制（分散）</span>
-          <span class="lg lg-l0">右侧 · 具体事件 ×3</span>
-        </div>
+        <section class="timeline-wrap timeline-dock">
+          <div class="timeline-head">
+            <span>事件时间轴</span>
+            <div class="timeline-head-right">
+              <button type="button" id="timeline-prev" class="timeline-nav-btn" aria-label="上一组时间事件">◀</button>
+              <span id="timeline-window-indicator" class="timeline-window-indicator">1 / 1</span>
+              <button type="button" id="timeline-next" class="timeline-nav-btn" aria-label="下一组时间事件">▶</button>
+              <span id="timeline-active-date" class="timeline-active-date">-</span>
+            </div>
+          </div>
+          <div id="timeline" class="timeline">
+            <div class="timeline-line"></div>
+            <div id="timeline-nodes" class="timeline-nodes"></div>
+            <div id="timeline-tooltip" class="timeline-tooltip" aria-hidden="true"></div>
+          </div>
+        </section>
+        <div class="stage-footer">Hover 预览路径，Click 锁定推理链路，时间轴与详情联动</div>
       </section>
-    </main>
 
-    <div id="time-drawer" class="drawer" aria-hidden="true">
-      <div class="drawer-backdrop" id="time-drawer-backdrop"></div>
-      <div class="drawer-panel">
-        <div class="drawer-header">
-          <h2 id="time-drawer-title">时间线</h2>
-          <button type="button" class="btn-close" id="time-drawer-close" aria-label="关闭">×</button>
-        </div>
-        <div id="time-drawer-body" class="drawer-body"></div>
-      </div>
-    </div>
+      <aside class="right-panel" aria-label="动态详情">
+        <section class="card">
+          <h2>Event Info</h2>
+          <div id="detail-content" class="muted">点击事件或时间轴节点查看详情</div>
+        </section>
+        <section class="card">
+          <h2>Market Impact</h2>
+          <div id="impact-content" class="muted">将自动提取影响描述并高亮关键词</div>
+        </section>
+        <section class="card">
+          <h2>Mechanism Chain</h2>
+          <div id="chain-content" class="muted">选中具体事件后显示</div>
+        </section>
+        <section class="card">
+          <h2>Sources</h2>
+          <div id="sources-content" class="muted">来源信息将在事件选中后展示</div>
+          <div id="news-actions" class="hidden">
+            <button type="button" id="btn-news" class="btn-primary">查看原始新闻</button>
+          </div>
+        </section>
+      </aside>
+    </main>
 
     <div id="news-modal" class="modal" aria-hidden="true">
       <div class="modal-backdrop" id="news-modal-backdrop"></div>
@@ -81,6 +127,6 @@
       </div>
     </div>
 
-    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/app.js?v=4"></script>
   </body>
 </html>
